@@ -15,6 +15,14 @@ var app = express();
 var db = require('./config/connection')
 var session = require('express-session')
 // view engine setup
+
+Handlebars.registerHelper('ifEquals',function(v1,v2,options){
+  if(v1 === v2 ){
+    return options.fn(this)
+  }
+  return options.inverse(this)
+})
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutDir:__dirname+'/views/layouts/',partialsDir:__dirname+'/views/partials/'}))
@@ -25,7 +33,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
 
-
 app.use(session({
   secret:'Key',
   cookie:{
@@ -34,7 +41,7 @@ app.use(session({
   resave:true,
   saveUninitialized:true,
   store: MongoStore.create({
-    mongoUrl: 'mongodb://localhost/database',
+    mongoUrl: 'mongodb://localhost/quizapp',
     autoRemove: 'native', /*'Default' */
     ttl: 3600 * 24 * 30 * 2 // = 60 days. Default  ( second  )
   })
@@ -49,10 +56,9 @@ db.connect((err)=>{
 })
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
-app.all('*',(req,res,next)=>{
-  res.redirect('/')
-  // console.log(req.originalUrl)
-})
+// app.all('*',(req,res,next)=>{
+//   res.redirect('/')
+// })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

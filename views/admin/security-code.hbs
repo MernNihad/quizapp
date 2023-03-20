@@ -1,0 +1,41 @@
+<section>
+  <div class="container-fluid align-as-center">
+    <div class="box-shadow-forgot">
+      <div class="top-section-forgot">
+        <div>
+          <h4>Security code</h4>
+        </div>
+      </div>
+        <form action="/admin/add-security-code" method="post">
+        {{#if MESSAGE}}
+              {{#if MESSAGE.status}}
+                <div class="alert alert-success" role="alert">
+                  {{MESSAGE.message}}
+                </div>
+              {{else}}
+                <div class="alert alert-danger" role="alert">
+                  {{MESSAGE.message}}
+                </div>
+              {{/if}}
+            {{/if}}
+          <div>
+            <div>
+              <input class="email-forgot" type="number" placeholder="Security Code" name="security_code" />
+            </div>
+          </div>
+          <div class="bottom-section-Last_heading">
+            <div></div>
+            <div class="bottom-section-rightBtn">
+              <div>
+                <a href="/admin/" class="btn btn-back ">Back</a>
+              </div>
+              <div>
+                <button class="btn btn-success btn-forgot" type="submit">Search</button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>

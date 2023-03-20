@@ -1,0 +1,85 @@
+{{#if MESSAGE}}
+  {{#if MESSAGE.status}}
+    <div class="alert alert-success" role="alert">
+      {{MESSAGE.message}}
+    </div>
+  {{else}}
+    <div class="alert alert-danger" role="alert">
+      {{MESSAGE.message}}
+    </div>
+  {{/if}}
+{{/if}}
+
+<div class="my-login-page">
+  <section class="h-100">
+    <div class="container main-container h-100">
+      <div class="row justify-content-center h-100">
+        <div class="card-wrapper">
+          <div class="top-heading-main_div">
+            <div class="p-3 top-heading-sub_div">
+              <h3
+                class="top-heading"
+                style="font-family: 'Avenir', sans-serif ;"
+              >Edit teacher</h3>
+            </div>
+          </div>
+          <div class="card fat">
+            <div class="card-body">
+              {{! <h4 class="card-title text-decoration-underline" style="font-family: 'Avenir', sans-serif ;">Register</h4> }}
+              <form
+              autocomplete="off"
+                action="/admin/edit-teacher/{{response._id}}"
+                style="font-family: 'Avenir', sans-serif ;"
+                method="post"
+                id="signupForm"
+                class="signup-form"
+              >
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    value="{{response.name}}"
+                    class="form-control"
+                    name="name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">E-Mail Only</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value="{{response.email}}"
+                    class="form-control"
+                    name="email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    value="{{response.password}}"
+                    autocomplete="on"
+                  />
+                </div>
+                {{! <div class="form-group form-check">
+                                    <label class="form-check-label" for="agree">I agree to the <a class="text-success" href="#">Terms and
+                                            Conditions</a></label>
+                                    <input type="checkbox" class="form-check-input" id="agree" name="agree">
+                                </div> }}
+                <div class="form-group m-0">
+                  <button type="submit" class="btn btn-success btn-block">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

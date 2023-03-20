@@ -1,0 +1,49 @@
+<div class="body-of-choosen">
+    <form class="form-bosy-of-choosen">
+        <div class="formContainer-btn">
+            <p class="formContainer-topContent">choose any one</p>
+        </div>
+        <div class="formContainer-btn">
+            <a href="/admin/mcq/{{_id_this}}/{{_name_this}}" >MCQ</a>
+            <a href="/admin/trueOrFalse/{{_id_this}}/{{_name_this}}">TRUE / FALSE</a>
+            <a >POOL</a>
+            {{!-- onclick="viewDisplay('/admin/addQst/pool')" --}}
+            <a href="/admin/typeAnswer/{{_id_this}}/{{_name_this}}">TYPE ANSWER</a>
+            <a>PUZZLE</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .body-of-choosen {
+        height: 500px;
+        text-align: center;
+        display: grid;
+        margin: 17px;
+        align-items: center;
+        background-color: white;
+    }
+
+    .form-bosy-of-choosen {
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+    }
+
+    .formContainer-btn a {
+       border: none;
+    border-radius: 6px;
+    margin: 10px;
+    background-color: #ede8df;
+    padding: 11px;
+    }
+
+    .formContainer-btn a:hover {
+        border: 1px solid black;
+    }
+
+    .formContainer-topContent {
+        font-size: 16px;
+        font-weight: 600;
+    }
+</style>

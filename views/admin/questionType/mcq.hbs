@@ -1,0 +1,48 @@
+<section class="mt-5">
+    <div class="container">
+        <div class="">
+            <a href="/admin" class="text-dark text-decoration-none">
+                <h3>Add a new Category</h3>
+            </a>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+            <div class="">
+                <form action='/admin/add-categories' method="post" enctype="multipart/form-data">
+                    <div class="row add-SubCatLeftUI  mt-4">
+                        {{#if Response_For_AddCategories}}
+                        {{#if Response_For_AddCategories.status}}
+                        <div class="success-forgot-password w-100">
+                            <div class="error-message">
+                                <div class="error-message-heading">{{Response_For_AddCategories.message}}</div>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="error-div w-100">
+                            <div class="error-message">
+                                <p class="error-message-heading">{{Response_For_AddCategories.message}}</p>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                        <div class="col-12">
+                            <label>Name <span class="text-danger">*</span></label>
+                            <input type="text" placeholder="Name" class="form-control" name="name" />
+                        </div>
+                        <div class="col-12">
+                            <label>Image</label>
+                            <img class="m-4" src="" alt="" width="65px" height="50px" id="imgViewSubCat">
+                            <input type="file" class="form-control" name="image"
+                                onchange="viewImageSubCategory(event)" />
+                        </div>
+                        <div class="ml-3 Btn-ForCustomize margin-bottom-1rem">
+                            <div class="">
+                                <button type="submit" class="btn btn-success mt-3 wid-110">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="w-100  text-dark "> </div> {{!-- this designed class use this one ( addSubCat-RightPanel ) --}}
+        </div>
+    </div>
+</section>

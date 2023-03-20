@@ -1,0 +1,75 @@
+<div class="row mt-2 m-4">
+    {{#if Data}}
+
+    {{#each Data.response}}
+    <div class="body-view-qtn m-2">
+        <div class="body-view-qtn-ptag">
+            <p style="    margin: 10px 0rem 20px 7px;">{{this.question}}</p>
+        </div>
+        {{#if ../Data.div}}
+        <div class="">
+            <div class="body-view-qtn-ptag-option">
+                <div class="body-view-qtn-option-div">{{this.option_A}}</div>
+                <div class="body-view-qtn-option-div">{{this.option_B}}</div>
+            </div>
+            <div class="body-view-qtn-ptag-option">
+                <div class="body-view-qtn-option-div">{{this.option_C}}</div>
+                <div class="body-view-qtn-option-div">{{this.option_D}}</div>
+            </div>
+        </div>
+        {{/if}}
+        {{#if ../answer}}
+        <div class="" style="display: flex;">
+            <p class="m-2">ANSWER : </p>
+            <a class="m-2">{{this.answer}}</a>
+        </div>
+        {{/if}}
+        <div class="">
+            <a class="btn btn-success" href="/admin/editQstn/{{this._id}}/{{this.typeOfQst}}">Edit</a>
+            <a href="#" class="btn btn-danger" onclick="deleteQstn('{{this._id}}',',{{this.name}}')">Delete</a>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p class="" style="font-weight: 600;padding:10px;font-size:19px">No contents</p>
+    {{/if}}
+</div>
+
+
+<style>
+    .body-view-qtn {
+        background-color: #e3e3e3;
+        width: 100%;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 5px;
+        overflow: auto;
+        text-align: center;
+    }
+
+    .body-view-qtn:hover {
+        border: 1px solid black;
+        transform: scale(1.02);
+    }
+
+    .body-view-qtn-ptag {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .body-view-qtn-ptag-option {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+    }
+
+    .body-view-qtn-option-div {
+        background-color: #c8c9c9;
+        border-radius: 3px;
+        padding: 6px;
+        margin: 5px;
+        width: 200px;
+        text-align: center;
+    }
+</style>

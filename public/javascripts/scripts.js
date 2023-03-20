@@ -191,24 +191,50 @@ function deleteCat(id, name) {
   } else {
   }
 }
-function deleteSubCat(id, name) {
+
+
+function deleteteacher(id, name) {
   let cfm = confirm("Are you want to delete " + name);
   if (cfm) {
     $.ajax({
-      url: "/admin/delete-subcategory/",
+      url: "/admin/delete-teacher/",
       method: "post",
       data: {
         id: id,
       },
       success: (response) => {
         if (response.status) {
-          if (response.delete) {
-            location.reload();
-          } else {
-            location.reload();
-          }
+          location.reload();
         } else {
           location.reload();
+        }
+      },
+    });
+  } else {
+  }
+}
+
+
+
+function deleteQstn(id, name) {
+  let cfm = confirm("Are you want to delete " + name);
+  if (cfm) {
+    $.ajax({
+      url: "/admin/delete-question/",
+      method: "post",
+      data: {
+        id: id,
+      },
+      success: (response) => {
+        if (response.status) {
+          // if (response.delete) {
+            location.reload();
+          // } else {
+          // }
+        } else {
+          alert('occurs  error, try again')
+          location.reload();
+          // location.reload();
         }
       },
     });
@@ -219,6 +245,10 @@ const get =(route)=>{
   window.location.href=route
 }
 const link_url=(url)=>{
+  window.location.href=url
+}
+
+const viewDisplay=(url)=>{
   window.location.href=url
 }
 

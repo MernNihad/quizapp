@@ -1,93 +1,35 @@
-<section id="count">
-  <div class="cards-section">
-    <div class="count-card">
-      <div class="color-gold-parent">
-        <h2 class="color-gold" id="user_count">0</h2>
-      </div>
-      <div class="count-card-parentDiv">
-        <div class="count-card-childDiv">
-          <a href="#"> <i class="fa-solid fa-user-check icon-cus text-dark icon-font-size"></i></a>
+<div class="row ml-1">
+  {{#if Categories}}
+    {{#each Categories}}
+      <div
+        onclick="viewDisplay('/admin/subcategoryVIew/{{this._id}}/{{this.name}}')"
+        class="card card-for-view-hover m-4"
+        style="width: 18rem;"
+      >
+        <img
+          class="card-img-top"
+          src="/category-images/{{this._id}}.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}}</h5>
+          <a
+            class="btn btn-success"
+            href="/admin/edit-category/{{this._id}}/{{this.name}}"
+          >Edit</a>
+          <a
+            href="#"
+            class="btn btn-danger"
+            onclick="deleteCat('{{this._id}}',',{{this.name}}')"
+          >Delete</a>
         </div>
       </div>
-    </div>
-    <div class="count-card">
-      <div class="color-gold-parent">
-        <h2 class="color-gold" id="cat_count">0</h2>
-      </div>
-      <div class="count-card-parentDiv">
-        <div class="count-card-childDiv">
-          <a href="#"><i class="fa-solid fa-list text-dark icon-font-size"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="count-card">
-      <div class="color-gold-parent">
-        <h2 class="color-gold" id="sub_cat_count">0</h2>
-      </div>
-      <div class="count-card-parentDiv">
-        <div class="count-card-childDiv">
-          <a href="#"><i class="fa-solid fa-bars-staggered text-dark icon-font-size"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="count-card">
-      <div class="color-gold-parent">
-        <h2 class="color-gold" id="email_count">0</h2>
-      </div>
-      <div class="count-card-parentDiv">
-        <div class="count-card-childDiv">
-          <a href="#"> <i class="fa-solid fa-envelope-circle-check text-dark icon-font-size"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="margin-top-2rem5">
-  <div class="container margin-bottom-5rem">
-    <div class="d-flex justify-content-center">
-    </div>
-    {{#if Categories}}
-    <table class="table mt-4" id="TableFoRfillter">
-      <thead class="text-center">
-        <tr class=""> 
-          <th scope="col"> <span class="font-size-15px">#</span> Logo</th>
-          <th scope="col">Name</th>
-          <th></th>
-          <th scope="col"></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody class="text-center" >
-        {{#each Categories}}
-        <tr class="trr">
-          <td class="tdd">
-            <img src="/category-images/{{this._id}}.jpg" alt="" width="65px" height="50px">
-          </td>
-          <td class="word-break-break-all vertical-center">{{this.name}}</td>
-          <td>
-            <a class="btn text-dark whiteLight" href="/admin/add-subcategories/{{this._id}}/{{this.name}}"><i
-                class="fa-solid fa-plus font-size-15"></i></a>
-          </td>
-          <td>
-            <a class="btn text-dark whiteLight DynamicSubCatView" href="/admin/subcategoryVIew/{{this._id}}/{{this.name}}"><i
-                class="fa-solid fa-caret-right font-size-15"></i></a>
-          </td>
-          <td>
-            <a class="btn text-dark whiteLight" href="/admin/edit-category/{{this._id}}/{{this.name}}"><i
-                class="fa-solid fa-pen font-size-15"></i></a>
-          </td>
-          <td class="">
-            <a class="btn text-danger whiteLight " onclick="deleteCat('{{this._id}}',',{{this.name}}')"> <i
-                class="fa-solid fa-trash-can font-size-15"></i></a>
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-    {{else}}
+    {{/each}}
+  {{else}}
     <h3>No data available!</h3>
-    {{/if}}
-  </div>
-</section>
+  {{/if}}
+</div>
+
+<style>
+  .card-for-view-hover:hover{ border: 1px solid black; transform: scale(1.01); }
+</style>

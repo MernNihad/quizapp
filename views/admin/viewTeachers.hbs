@@ -1,0 +1,35 @@
+<section class="margin-bottom-5rem">
+  <div class="container">
+    <table class="table mt-4" id="allUsers">
+      <thead>
+        <tr>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email Address</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if teacher}}
+        {{#each teacher}}
+        <tr>
+          {{!-- <td>{{this.date}}</td> --}}
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td><a class="btn btn-success" href="/admin/edit-teacher/{{this._id}}/{{this.name}}">Edit</a></td>
+          <td><a class="btn btn-danger" onclick="deleteteacher('{{this._id}}',',{{this.name}}')">Delete</a></td>
+           {{!-- <div class=""> --}}
+            
+            
+        {{!-- </div> --}}
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <td>No contents</td>
+        </tr>
+        {{/if}}
+      </tbody>
+    </table>
+  </div>
+</section>

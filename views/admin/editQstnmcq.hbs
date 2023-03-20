@@ -1,0 +1,79 @@
+<section class="mt-5">
+    <div class="container">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="">
+                <form action='/admin/editmcq' method="post" id="editmcq">
+                    <div class="row add-SubCatLeftUI  mt-4">
+
+
+                        {{!-- <div class="success-forgot-password"> --}}
+
+                            {{!-- </div> --}}
+                        {{#if response }}
+                        {{#if response.status}}
+                        <div class="alert alert-success" role="alert">
+                            {{response.message}}
+                        </div>
+                        {{else}}
+                            <div class="alert alert-danger" role="alert">
+                                {{response.message}}
+                            </div>
+                        {{/if}}
+                        {{/if}}
+
+
+                        <div class="col-12 m-1">
+                            <label>Question <span class="text-danger">*</span></label>
+                            {{!-- <input type="text" placeholder="Name" class="form-control" name="name" /> --}}
+                            <textarea class="form-control" placeholder="Type here..."
+                                style="padding-left: 10px;font-size:15px" name="question" id="" cols="30"
+                                rows="5">{{Data.response.question}}</textarea>
+                        </div>
+
+
+                        <div class="col-12 m-1">
+                            <input placeholder="Option A" type="text" value="{{Data.response.option_A}}" name="option_A" class="form-control" id="">
+                        </div>
+                        <div class="col-12 m-1">
+                            <input value="{{Data.response.option_B}}" placeholder="Option B" type="text" name="option_B" class="form-control" id="">
+                        </div>
+                        <div class="col-12 m-1">
+                            <input value="{{Data.response.option_C}}" placeholder="Option C" type="text" name="option_C" class="form-control" id="">
+                        </div>
+                        <div class="col-12 m-1">
+                            <input value="{{Data.response.option_D}}" placeholder="Option D" type="text" name="option_D" class="form-control" id="">
+                        </div>
+                        <div class="col-12 m-1">
+                            <input  value="{{Data.response._id}}" type="text" hidden name="this_id" class="form-control" id="">
+                        </div>
+{{!-- 
+                        <div class="col-12 m-1">
+                            <input value="{{Data.response._id}}" type="text" hidden name="_category_id" class="form-control"
+                                id="">
+                        </div> --}}
+
+
+                        <label style="padding: 10px;" for="answer">Answer </label>
+                        <select
+                            style="border-radius: 2px;border: none;background-color: #e1e1de;padding: 4px;height: 35px;"
+                            name="answer" id="answer">
+                            <option {{#ifEquals Data.response.answer "option_A"}} selected {{/ifEquals}} value="option_A">Option A</option>
+                            <option {{#ifEquals Data.response.answer "option_B"}} selected {{/ifEquals}} value="option_B">Option B</option>
+                            <option {{#ifEquals Data.response.answer "option_C"}} selected {{/ifEquals}}value="option_C">Option C</option>
+                            <option {{#ifEquals Data.response.answer "option_D"}} selected {{/ifEquals}}value="option_D">Option D</option>
+                        </select>
+
+
+
+                        <div class="ml-3 Btn-ForCustomize margin-bottom-1rem">
+                            <div class="">
+                                <button type="submit" class="btn btn-success mt-3 wid-110">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="w-100  text-dark "> </div> {{!-- this designed class use this one ( addSubCat-RightPanel ) --}}
+        </div>
+    </div>
+</section>
