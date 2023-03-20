@@ -1,5 +1,5 @@
 /node_modules
 package-lock.json
-# public/category-images/
-# public/sub-category-images/
+public/category-images/
+public/sub-category-images/
 /pool
