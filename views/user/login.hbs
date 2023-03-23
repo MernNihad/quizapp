@@ -6,20 +6,10 @@
 </section>
 
 <section>
-    {{#if EmailError}}
+    {{#if MESSAGE}}
     <div>
         <div class="signup-emailErr text-center">
-            <p>{{EmailError}}</p>
-        </div>
-    </div>
-    {{/if}}
-</section>
-
-<section>
-    {{#if LoginError}}
-    <div>
-        <div class="signup-emailErr text-center">
-            <p>{{LoginError}}</p>
+            <p>{{MESSAGE.message}}</p>
         </div>
     </div>
     {{/if}}

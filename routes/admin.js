@@ -505,10 +505,10 @@ router.post("/add-categories", verifyLogin, (req, res) => {
 
 router.get("/viewQstn/:id/:name", verifyLogin, function (req, res, next) {
   productHelpers.getQuestions(req.params.id, req.params.name).then((response) => {
+    console.log(response,'start');
     if (response.status) {
       if (req.params.name === 'mcq_type') {
         response.div = true
-        console.log(response);
         res.render(`${variable.admin_router}/viewQstn`, {
           admin, Data: response,
           answer: true,
@@ -518,11 +518,12 @@ router.get("/viewQstn/:id/:name", verifyLogin, function (req, res, next) {
           admin, Data: response,
           answer: true,
         });
-      } else if (req.params.name === 'type_answer_type') {
+      } else if (req.params.name === 'type_question_type') {
         res.render(`${variable.admin_router}/viewQstn`, {
           admin, Data: response,
           answer: false,
         });
+        console.log('response',response);
       }
 
     } else {
@@ -554,7 +555,7 @@ router.get("/editQstn/:id/:name", verifyLogin, function (req, res, next) {
           response: req.session.MESSAGE
         });
         req.session.MESSAGE = null
-      } else if (req.params.name === 'type_answer_type') {
+      } else if (req.params.name === 'type_question_type') {
         res.render(`${variable.admin_router}/editQstntype`, {
           admin, Data: response,
           response: req.session.MESSAGE
@@ -751,6 +752,7 @@ router.get("/typeAnswer/:id/:name", verifyLogin, function (req, res, next) {
   req.session.MESSAGE = null
 });
 router.post("/typeAnswer", verifyLogin, function (req, res, next) {
+  console.log(req.body);
   productHelpers.addQuestions(req.body).then((resposne) => {
     if (resposne.status) {
       req.session.MESSAGE = {
@@ -1008,5 +1010,27 @@ router.post("/forgotPassword", (req, res) => {
     res.redirect(`/${variable.admin_router}/forgotPassword`);
   }
 });
+
+
+
+
+router.get("/getUsersTypeAnswer", (req, res) => {
+  // let sess = req.session;
+  // if (sess.Update_Password_Route_Status) {
+  //   let RESPONSE_FOR_ENTER_PASSWORD = sess.RESPONSE_FOR_ENTER_PASSWORD;
+  //   res.render(`${variable.admin_router}/forgotPassword`, {
+  //     RESPONSE_FOR_ENTER_PASSWORD,
+  //     static: true,
+  //   });
+  //   sess.RESPONSE_FOR_ENTER_PASSWORD = null;
+  // } else {
+  //   res.redirect(`/${variable.admin_router}/forgot-password`);
+  // }
+  productHelpers.getTypeAnswer(req.session.admin._id).then((response)=>{
+    console.log(response);
+    res.render(`${variable.admin_router}/viewMore`,{response})
+  })
+});
+
 
 module.exports = router;

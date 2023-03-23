@@ -1,0 +1,66 @@
+<div class="question-body mt-5">
+
+  {{#if MESSAGE}}
+    {{#if MESSAGE.status}}
+      <div class="alert alert-success" role="alert">
+        {{MESSAGE.message}}
+      </div>
+    {{else}}
+      <div class="alert alert-danger" role="alert">
+        {{MESSAGE.message}}
+      </div>
+    {{/if}}
+  {{/if}}
+  <div class="">
+    <p style="margin: 5px 15px;">Score 1</p>
+  </div>
+    {{#each response}}
+  {{!-- {{#if ../response}} --}}
+  <form action="/responseFortypeAnswer" method="post">
+    <div class="question-body-firstDiv">
+      {{!-- <p>{{response.}}</p> --}}
+    </div>
+    <div class="question-body-secondDiv">
+      <div class="option-div-body">
+        <div class="option-div">
+          {{!-- <input
+            type="radio"
+            name="__answer_select_user"
+            value="true"
+            id=""
+          /> --}}
+          {{!-- <label for="">True </label> --}}
+          <textarea disabled name="__answer_select_user" id="" placeholder="Type here..." cols="30" rows="10">{{response.answer}}</textarea>
+        </div>
+        {{!-- <div class="option-div">
+          <input
+            type="radio"
+            name="__answer_select_user"
+            value="false"
+            id=""
+          />
+          <label for="">False </label>
+        </div> --}}
+        <input type="text" hidden value="{{value._id}}" name="_id" />
+      </div>
+    </div>
+    <div class="question-body-thirdDiv">
+      <div class="submit-div">
+        <input type="submit" value="Submit" />
+      </div>
+    </div>
+  </form>
+  {{!-- {{/if}} --}}
+  {{/each}}
+
+
+</div>
+
+<style>
+  .question-body-thirdDiv{ text-align: center; } .question-body-secondDiv{
+  display: flex; } .question-body-firstDiv{ background-color: #fffbf6;
+  border-radius: 4px; padding: 15px; } .question-body{ } .option-div-body{
+  width: 100%; margin: 10px; } .option-div{ padding: 10px; background-color:
+  #e7e7d6; width: 100%; margin: 10px; } .submit-div{ padding: 9px;
+  background-color: #caddca; border-radius: 4px; }
+</style>

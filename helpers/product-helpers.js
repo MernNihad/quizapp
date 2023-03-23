@@ -383,6 +383,8 @@ module.exports = {
         })
     },
     getQuestions: (CategoryID, Category_Name) => {
+        console.log(objectId(CategoryID));
+        console.log(Category_Name);
         return new Promise(async (resolve, reject) => {
             let response = await db.get().collection(collection.ADMIN_QUESTION_COLLECTION).find({ _category_id: CategoryID, typeOfQst: Category_Name }).toArray()
             let obj
@@ -696,6 +698,14 @@ module.exports = {
                 length: result.length
             }
             resolve(obj)
+        })
+    },
+    getTypeAnswer: (id) => {
+        console.log(id,'id means');
+        return new Promise(async (resolve, reject) => {
+            let result = await db.get().collection(collection.USER_ANSWER_COLLECTION).find({ userID: id,question_type:'type_question_type' }).toArray()
+            // resolve(result)
+            console.log(result);
         })
     },
 }

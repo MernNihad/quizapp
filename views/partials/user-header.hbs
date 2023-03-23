@@ -5,7 +5,7 @@
         <div>
           {{!-- /public_asset/logo2.jpeg   --}}
           {{!-- <img src="" alt="" style="width: 135px;height:55px;border-radious:4px" onclick="link_url('/')"> --}}
-          <a class="navbar-brand padding-left-19px logo-tag" style="letter-spacing: 0px;font-style: 20px;" href="/"><span class="logo-subname">&lt;/&gt;&Sigma;</span> AHLBY<span>T</span></a>
+          <a class="navbar-brand padding-left-19px logo-tag" style="letter-spacing: 0px;font-style: 20px;" href="/"><span class="logo-subname">Quiz app</a>
         </div>
         {{!-- mobile view --}}
         <div class=" hide-991 account-space base my-auto "  style="" >
@@ -33,6 +33,9 @@
     {{!-- Desktop view --}}
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="nav navbar-nav ml-auto pl-auto response-style-align" style="font-family:'Avenir', sans-serif ;">
+        <a class="mr-2 ml-2 text-dark account-space-r "  href="/">Home</a>
+              <a class="mr-2 ml-2 text-dark account-space-r "  href="/signup">Explore</a>
+              <a class="mr-2 ml-2 text-dark account-space-r "  href="/signup">Score</a>
         {{#if userData}}
         <li class="nav-item">
           <div>
@@ -45,29 +48,20 @@
         {{else}}
         <div class="base my-auto">
           <li class="button-for-responsive-align">
-          <div class="account-space base" id="authAreUi">
-            {{!-- <a class=" text-dark account-space-r " style="    text-transform: uppercase;" href="/login">Log In</a> --}}
-            {{!-- <a class=" text-dark" style="vertical-align: middle;" href="">/</a> --}}
-            <a class=" text-dark account-space-r " style="    text-transform: uppercase;" href="/signup">Sign Up</a>
-          </div>
-        </li>
+            <div class="account-space base" id="authAreUi">
+              <a class=" text-dark account-space-r "  href="/signup">Sign Up</a>
+            </div>
+          </li>
         </div>
         {{/if}}
+
+
+
       </ul>
     </div>
         {{!--  --}}
   </nav>
 </header>
-
-
-{{!-- <div id="mySidenav" class="sidenav">
-  <a href="/" id="bodyLeftBtn-Home" style="text-transform: uppercase;">Home</a>
-  <a href="/aboutus" id="bodyLeftBtn-about" style="text-transform: uppercase;">About</a>
-  <a href="/contact" id="bodyLeftBtn-contact" style="text-transform: uppercase;">Contact</a>
-</div> --}}
-
-
-
 
 
 

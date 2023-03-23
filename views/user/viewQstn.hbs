@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    {{#each value}}
+    <a class="count-for-qstn" href="/viewQuestion/{{this._id}}" id="qstn">Question</a>
+  {{/each}}
+</div>
+
+
+<style>
+    body {
+  /* Set "my-sec-counter" to 0 */
+  counter-reset: my-sec-counter;
+}
+
+
+.count-for-qstn::before {
+  /* Increment "my-sec-counter" by 1 */
+  counter-increment: my-sec-counter;
+  content: " " counter(my-sec-counter) ". ";
+}
+ 
+</style>
