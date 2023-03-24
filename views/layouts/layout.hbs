@@ -74,6 +74,22 @@
 
 
 
+    {{#if teacher}}
+    {{> teacher-header}}
+    {{{body}}}
+    {{/if}}
+
+
+      {{#if teacher_login}}
+    {{{body}}}
+    {{/if}}
+
+    
+
+
+
+
+
 
     {{#if user_part}}
     {{{body}}}

@@ -16,7 +16,7 @@
   </div>
     {{#each response}}
   {{!-- {{#if ../response}} --}}
-  <form action="/responseFortypeAnswer" method="post">
+  <form action="/admin/checkTypeQstnAnswer" method="post">
     <div class="question-body-firstDiv">
       {{!-- <p>{{response.}}</p> --}}
     </div>
@@ -30,18 +30,28 @@
             id=""
           /> --}}
           {{!-- <label for="">True </label> --}}
-          <textarea disabled name="__answer_select_user" id="" placeholder="Type here..." cols="30" rows="10">{{response.answer}}</textarea>
+          <textarea disabled name="__answer_select_user" id="" placeholder="Type here..." cols="30" rows="10">{{this.answer}}</textarea>
         </div>
-        {{!-- <div class="option-div">
+        <div class="option-div">
           <input
             type="radio"
-            name="__answer_select_user"
-            value="false"
+            name="type_question_answer"
+            value="correct"
             id=""
           />
-          <label for="">False </label>
-        </div> --}}
-        <input type="text" hidden value="{{value._id}}" name="_id" />
+          <label for="">Correct </label>
+        </div>
+
+        <div class="option-div">
+          <input
+            type="radio"
+            name="type_question_answer"
+            value="wrong"
+            id=""
+          />
+          <label for="">Wrong </label>
+        </div>
+        <input type="text" hidden value="{{this._id}}" name="_id" />
       </div>
     </div>
     <div class="question-body-thirdDiv">

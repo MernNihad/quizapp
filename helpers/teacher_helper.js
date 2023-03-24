@@ -7,62 +7,40 @@ const { PRODUCT_COLLECTION } = require("../config/collections");
 const variables = require("../config/variables");
 const collections = require("../config/collections");
 module.exports = {
-  doSignup: (userData) => {
-    return new Promise(async (resolve, reject) => {
-      var today = new Date();
-      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date + ' ' + time;
-      let objData = {
-        name: userData.name,
-        email: userData.email,
-        date: dateTime,
-        password: userData.password
-      }
-      db.get().collection(collection.USER_COLLECTION).findOne({ email: objData.email }).then(async (response) => {
-        if (response == null) {
-          // objData.password = await bcrypt.hash(objData.password, 10);
-          db.get().collection(collection.USER_COLLECTION).insertOne(objData).then((data) => {
-            let proID = data.insertedId;
-            db.get().collection(collection.USER_COLLECTION).findOne({ _id: objectId(proID) }).then((user) => {
-              response = {
-                user: user,
-                login: true
-              }
-              resolve(response);
-            });
-          });
-        } else {
-          resolve({ login: false,message:'email available ' })
-        }
-      })
-    });
-  },
-  doLogin: (userData) => {
-    console.log('start server');
-    return new Promise(async (resolve, reject) => {
-      let response = {};
-      let user = await db.get().collection(collection.USER_COLLECTION).findOne({ email: userData.email });
-      if (user) {
-        if(user.password===userData.password){
-          console.log('email password correct');
-          db.get().collection(collections.USER_COLLECTION).findOne({_id:user._id}).then((user)=>{
-            console.log(user);
-            resolve({status:true,user})
-          })
-        }else{
-          console.log('Password not correct');
-        let message = 'Password not correct'
-        resolve({ status: false, message });
-        }
-      } 
-      else {
-        console.log("Email not found ");
-        let message = 'Email not found'
-        resolve({ status: false, message });
-      }
-    });
-  },
+    doLogin: (userData) => {
+        // console.log('start server');
+        return new Promise(async (resolve, reject) => {
+          let response = {};
+          let user = await db.get().collection(collection.ADMIN_ADD_TEACHER).findOne({ email: userData.email });
+          if (user) {
+            if(user.password===userData.password){
+              console.log('email password correct');
+              db.get().collection(collections.ADMIN_ADD_TEACHER).findOne({_id:user._id}).then((data)=>{
+
+                // console.log(user,'user for server side');
+                resolve({status:true,data})
+              })
+            }else{
+              console.log('Password not correct');
+            let message = 'Password not correct'
+            resolve({ status: false, message });
+            }
+          } 
+          else {
+            console.log("Email not found ");
+            let message = 'Email not found'
+            resolve({ status: false, message });
+          }
+        });
+      },
+
+
+
+
+
+
+
+ 
   getQuestionForAtten: (CateId,type) => {
     console.log(CateId,type);
     return new Promise(async (resolve, reject) => {

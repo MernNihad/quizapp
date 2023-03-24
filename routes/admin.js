@@ -15,7 +15,6 @@ const verifyLogin = (req, res, next) => {
     res.redirect(`/${variable.admin_router}/login`);
   }
 };
-
 //  --------------------------------------------------------------------------------
 // | *************************************HOME************************************* |
 //  --------------------------------------------------------------------------------
@@ -27,8 +26,6 @@ router.get("/", verifyLogin, function (req, res, next) {
 //  --------------------------------------------------------------------------------
 // | *************************************HOME************************************* |
 //  --------------------------------------------------------------------------------
-
-
 router.get("/view-teacher", (req, res) => {
   productHelpers.getTeacher().then((response) => {
     if (response.status) {
@@ -1014,7 +1011,8 @@ router.post("/forgotPassword", (req, res) => {
 
 
 
-router.get("/getUsersTypeAnswer", (req, res) => {
+router.get("/getUsersTypeAnswer/:id", (req, res) => {
+  req.session.RedirectPurposeStoreID = req.params.id
   // let sess = req.session;
   // if (sess.Update_Password_Route_Status) {
   //   let RESPONSE_FOR_ENTER_PASSWORD = sess.RESPONSE_FOR_ENTER_PASSWORD;
@@ -1026,11 +1024,44 @@ router.get("/getUsersTypeAnswer", (req, res) => {
   // } else {
   //   res.redirect(`/${variable.admin_router}/forgot-password`);
   // }
-  productHelpers.getTypeAnswer(req.session.admin._id).then((response)=>{
+  productHelpers.getTypeAnswer(req.params.id).then((response)=>{
     console.log(response);
-    res.render(`${variable.admin_router}/viewMore`,{response})
+    // res.render(`${variable.admin_router}/editQstntype`, {
+    //   admin, 
+    //   // Data: response,
+    //   // response: req.session.MESSAGE
+    // });
+    res.render(`${variable.admin_router}/viewMore`,{response,admin,
+    MESSAGE:req.session.MESSAGE
+    })
+    req.session.MESSAGE =null
   })
 });
+
+
+
+
+
+router.post("/checkTypeQstnAnswer", (req, res) => {
+  console.log(req.body);
+  if(req.body.type_question_answer === 'correct'){
+    productHelpers.update_Type_Question_Answer(req.body._id).then((response)=>{
+            req.session.MESSAGE = {
+      message: 'score added',
+      status: true,
+    }
+    console.log(req.session.RedirectPurposeStoreID,'seession id');
+      res.redirect(`/${variable.admin_router}/getUsersTypeAnswer/${req.session.RedirectPurposeStoreID}`)
+      })
+  }else{
+    res.redirect(`/${variable.admin_router}/getUsersTypeAnswer/${req.session.RedirectPurposeStoreID}`)
+  }
+  //   console.log(response);
+
+    
+});
+
+
 
 
 module.exports = router;

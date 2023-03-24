@@ -228,32 +228,30 @@ module.exports = {
                     resolve({status:false,message:'not updated'})
                 }
             })
-            // if (result) {
-            //     obj = {
-            //         status: false,
-            //         response: null
-            //     }
-            //     resolve(obj)
-            // }
-            // var today = new Date();
-            // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            // var dateTime = date + ' ' + time;
-
-            // db.get().collection(collection.CATEGORY_COLLECTION).updateOne({ _id: objectId(CategoryID) }, {
-            //     $set: {
-            //         name: name,
-            //         date: dateTime,
-            //     }
-            // }).then((response) => {
-            //     obj = {
-            //         status: true,
-            //         response
-            //     }
-            //     resolve(obj)
-            // })
+        
         })
     },
+
+
+
+    update_Type_Question_Answer: (id) => {
+        return new Promise(async (resolve, reject) => {
+            let obj
+            db.get().collection(collection.USER_ANSWER_COLLECTION).updateOne({ _id: objectId(id) },{$set:{
+                score:1
+            }}).then((response)=>{
+                if(response.modifiedCount>0){
+                    resolve({status:true,message:'successfully updates'})
+                }else
+                {
+                    resolve({status:false,message:'not updated'})
+                }
+            })
+        
+        })
+    },
+
+
     // setSecurityCode
     addSecurityCode: (code) => {
         console.log(code);
@@ -701,11 +699,9 @@ module.exports = {
         })
     },
     getTypeAnswer: (id) => {
-        console.log(id,'id means');
         return new Promise(async (resolve, reject) => {
-            let result = await db.get().collection(collection.USER_ANSWER_COLLECTION).find({ userID: id,question_type:'type_question_type' }).toArray()
-            // resolve(result)
-            console.log(result);
+            let result = await db.get().collection(collection.USER_ANSWER_COLLECTION).find({ userID: id,typeOfQst:'type_question_type',score:0}).toArray()
+            resolve(result)
         })
     },
 }

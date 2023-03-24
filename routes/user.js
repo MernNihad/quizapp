@@ -1,5 +1,6 @@
 const { response } = require("express");
 var express = require("express");
+const variables = require("../config/variables");
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-helpers");
 var router = express.Router();
@@ -19,16 +20,46 @@ const verifyLogin = (req, res, next) => {
 router.get("/", async function (req, res, next) {
   res.redirect('/home')
 });
-//----------HOME-PAGE----------//
-router.get('/home',verifyLogin, (req, res) => {
 
+router.get("/explore", async function (req, res, next) {
+  res.redirect('/home')
+});
+
+
+router.get("/scores", async function (req, res, next) {
+  console.log(req.session.user._id);
+  let total_score =await userHelpers.getScore(req.session.user._id)
+  total_score = total_score[0]
+
+  res.render("user/scores", {
+    user_header,
+    userData: req.session.user, 
+    total_score,
+  });
+
+});
+
+
+
+router.get("/clearScore", async function (req, res, next) {
+  let total_score =await userHelpers.clearScore(req.session.user._id)
+  total_score = total_score[0]
+
+  res.redirect(`/scores`)
+
+});
+//----------HOME-PAGE----------//
+router.get('/home',verifyLogin,async (req, res) => {
+  // let total_score =await userHelpers.getScore()
+  // total_score = total_score[0]
   userHelpers.AllCatagories().then((response)=>{
-    console.log(response);
+    // console.log(total_score);
     if(response.status){
       res.render("user/home", {
         user_header,
         userData: req.session.user, 
-        response
+        response,
+        // total_score,
       });
     }else{
       res.render("user/home", {
@@ -208,7 +239,7 @@ router.post('/question_answer', (req, res) => {
       res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
     }
   }else if (response.typeOfQst==='type_question_type'){
-      userHelpers.addAnswerCollectionForUsers(req.session.user._id,score=0,req.body._id,type_answe=true,req.body.__answer_select_user).then(()=>{
+      userHelpers.addAnswerCollectionForUsers(req.session.user._id,score=0,req.body._id,type_answe=true,req.body.__answer_select_user,response.typeOfQst).then(()=>{
         req.session.MESSAGE = {
           message:'Submited ',
           status:true

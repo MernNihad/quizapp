@@ -8,6 +8,7 @@ const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
+var teacherRouter = require('./routes/teacher');
 var fileUpload = require('express-fileupload')
 var MongoStore = require('connect-mongo')
 const { handlebars } = require('hbs');
@@ -57,6 +58,7 @@ db.connect((err)=>{
 })
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
+app.use('/teacher', teacherRouter);
 // app.all('*',(req,res,next)=>{
 //   res.redirect('/')
 // })
