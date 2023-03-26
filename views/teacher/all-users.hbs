@@ -1,0 +1,26 @@
+<section class="margin-bottom-5rem">
+  <div class="container">
+    <table class="table mt-4" id="allUsers">
+      <thead>
+        <tr>
+          <th scope="col">Active Date</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email Address</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each userData}}
+        <tr>
+          <td>{{this.date}}</td>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td> 
+            <a href="/teacher/getUsersTypeAnswer/{{this._id}}">more...</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

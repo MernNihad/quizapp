@@ -6,7 +6,7 @@
           <h4>Security code</h4>
         </div>
       </div>
-        <form action="/admin/add-security-code" method="post">
+        <form action="/admin/add-security-code" method="post" id="">
         {{#if MESSAGE}}
               {{#if MESSAGE.status}}
                 <div class="alert alert-success" role="alert">
@@ -20,7 +20,7 @@
             {{/if}}
           <div>
             <div>
-              <input class="email-forgot" type="number" placeholder="Security Code" name="security_code" />
+              <input class="email-forgot" type="number" required placeholder="Security Code" name="security_code" />
             </div>
           </div>
           <div class="bottom-section-Last_heading">

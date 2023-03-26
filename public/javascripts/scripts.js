@@ -155,22 +155,9 @@ $(document).ready(function () {
   $("#TableFoRfillter").DataTable();
   $("#allUsers").DataTable();
   $("#subcategory").DataTable();
-  ReCount();
+  
 });
-function ReCount() {
-  $.ajax({
-    url: "/admin/re_count",
-    method: "post",
-    success: (response) => {
-      if (response.admin) {
-        $("#sub_cat_count").html(response.obj.subcategories.length);
-        $("#user_count").html(response.obj.userCount.length);
-        $("#cat_count").html(response.obj.categories.length);
-        $("#email_count").html(response.obj.emailAll.length);
-      }
-    },
-  });
-}
+
 function deleteCat(id, name) {
   let cfm = confirm("Are you want to delete " + name);
   if (cfm) {
@@ -227,10 +214,7 @@ function deleteQstn(id, name) {
       },
       success: (response) => {
         if (response.status) {
-          // if (response.delete) {
             location.reload();
-          // } else {
-          // }
         } else {
           alert('occurs  error, try again')
           location.reload();
@@ -240,6 +224,10 @@ function deleteQstn(id, name) {
     });
   }
 }
+
+
+
+
 
 const get =(route)=>{
   window.location.href=route

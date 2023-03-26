@@ -8,11 +8,25 @@ var router = express.Router();
 //----------SET-VARIABLE----------//
 var admin = true;
 //----------LOGIN-CHECK----------//
+
 const verifyLogin = (req, res, next) => {
   if (req.session.adminLoggedIn) {
     next();
   } else {
     res.redirect(`/${variable.admin_router}/login`);
+  }
+};
+
+const verifyLogin_or_teacher = (req, res, next) => {
+  if (req.session.adminLoggedIn || req.session.teacher_status) {
+    next();
+  } else {
+    if(req.session.adminLoggedIn!==true){
+      res.redirect(`/${variable.admin_router}/login`);
+    }
+    if(req.session.teacher_status!==true){
+      res.redirect(`teacher/login`);
+    }
   }
 };
 //  --------------------------------------------------------------------------------
@@ -26,13 +40,13 @@ router.get("/", verifyLogin, function (req, res, next) {
 //  --------------------------------------------------------------------------------
 // | *************************************HOME************************************* |
 //  --------------------------------------------------------------------------------
-router.get("/view-teacher", (req, res) => {
+router.get("/view-teacher", verifyLogin,(req, res) => {
   productHelpers.getTeacher().then((response) => {
     if (response.status) {
       res.render(`${variable.admin_router}/viewTeachers`,
         {
           admin,
-          teacher: response.categories
+          teachers: response.categories
         })
     }
     else {
@@ -47,7 +61,7 @@ router.get("/view-teacher", (req, res) => {
 
 
 
-router.get("/add-teacher", (req, res) => {
+router.get("/add-teacher", verifyLogin,(req, res) => {
   res.render(`${variable.admin_router}/addTeacher`,
     {
       admin,
@@ -56,7 +70,7 @@ router.get("/add-teacher", (req, res) => {
   req.session.MESSAGE = null
 });
 
-router.post("/add-teacher", (req, res) => {
+router.post("/add-teacher",verifyLogin, (req, res) => {
   console.log(req.body);
   productHelpers.addTeacher(req.body).then((response) => {
     if (response.status) {
@@ -110,7 +124,7 @@ router.get("/all-users", verifyLogin, (req, res) => {
 // | ************************************DELETE************************************ |
 //  --------------------------------------------------------------------------------
 //----------DELETE-CATEGORY----------//
-router.post("/delete-category", (req, res) => {
+router.post("/delete-category",verifyLogin, (req, res) => {
   let categoryId = req.body.id;
   productHelpers.deleteCategory(categoryId).then((response) => {
     if (response.status) {
@@ -121,8 +135,8 @@ router.post("/delete-category", (req, res) => {
   });
 });
 //----------DELETE-SUB-CATEGORY----------//
-router.post("/delete-question/", (req, res) => {
-  if (req.session.adminLoggedIn) {
+router.post("/delete-question/", verifyLogin_or_teacher,(req, res) => {
+  // if (req.session.adminLoggedIn) {
     let subcategoryId = req.body.id;
     let name = req.session.Name_Show_Subcategory_View
     productHelpers.deleteQuestion(subcategoryId).then((response) => {
@@ -134,14 +148,7 @@ router.post("/delete-question/", (req, res) => {
         res.json({ status: true, delete: false })
       }
     });
-  } else {
-    res.json({ status: false, delete: null })
-  }
 });
-
-
-
-
 
 router.get("/edit-teacher/:id/:name", verifyLogin, async (req, res) => {
   let name = req.session.Category_Name = req.params.name   // null
@@ -185,14 +192,14 @@ router.post("/edit-teacher/:id", verifyLogin, async (req, res) => {
   });
 })
 
-router.post("/delete-teacher", (req, res) => {
+router.post("/delete-teacher", verifyLogin,(req, res) => {
   let categoryId = req.body.id;
   productHelpers.deleteTeacher(categoryId).then((response) => {
     res.json({ status: true })
   });
 });
 
-router.get("/add-security-code", (req, res) => {
+router.get("/add-security-code",verifyLogin, (req, res) => {
   res.render(`${variable.admin_router}/security-code`, {
     admin,
     Admin: req.session.admin,
@@ -201,7 +208,7 @@ router.get("/add-security-code", (req, res) => {
   req.session.MESSAGE = null
 });
 
-router.post("/add-security-code", (req, res) => {
+router.post("/add-security-code",verifyLogin, (req, res) => {
   console.log(req.body);
   productHelpers.addSecurityCode(req.body.security_code).then((response) => {
     if (response.status) {
@@ -222,7 +229,7 @@ router.post("/add-security-code", (req, res) => {
 
 // Edit techers 
 
-router.get("/edit-security-code", (req, res) => {
+router.get("/edit-security-code", verifyLogin,(req, res) => {
   productHelpers.getSecurityCode().then((response) => {
     res.render(`${variable.admin_router}/editSecurityCode`, {
       admin,
@@ -234,7 +241,7 @@ router.get("/edit-security-code", (req, res) => {
   })
 });
 
-router.post("/edit-security-code", (req, res) => {
+router.post("/edit-security-code",verifyLogin, (req, res) => {
   // console.log(req.body);
   productHelpers.editSecurityCode(req.body.security_code, req.body.this_id).then((response) => {
     if (response.status) {
@@ -257,7 +264,7 @@ router.post("/edit-security-code", (req, res) => {
 // | *************************************EDIT************************************* |
 //  --------------------------------------------------------------------------------
 //----------GET-EDIT-CATEGORY----------//
-router.get("/edit-category/:id/:name", verifyLogin, async (req, res) => {
+router.get("/edit-category/:id/:name", verifyLogin_or_teacher, async (req, res) => {
   let name = req.session.Category_Name = req.params.name   // null
   let id = req.session.Category_Id = req.params.id         // null
   let category = await productHelpers.getCategoryDetails(req.params.id);
@@ -273,7 +280,7 @@ router.get("/edit-category/:id/:name", verifyLogin, async (req, res) => {
   req.session.Response_For_Edit_Category = null
 });
 //----------POST-EDIT-CATEGORY----------//
-router.post("/edit-category/:id", verifyLogin, (req, res) => {
+router.post("/edit-category/:id", verifyLogin_or_teacher, (req, res) => {
   let CheckWhiteSpace = req.body.name;
   let id = req.params.id;
   let trimStr = CheckWhiteSpace.trim();
@@ -309,6 +316,7 @@ router.post("/edit-category/:id", verifyLogin, (req, res) => {
   }
 });
 //----------GET-EDIT-PROFILE----------//
+
 router.get("/edit-profile", verifyLogin, (req, res) => {
   let Admin = req.session.admin;
   let Edit_Response = req.session.Response_For_Edit_Profile
@@ -430,25 +438,34 @@ router.post("/add-subcategories", verifyLogin, (req, res) => {
   }
 });
 //----------GET-ADD-CATEGORIES----------//
-router.get("/add-categories", verifyLogin, (req, res) => {
+router.get("/add-categories/:name", verifyLogin_or_teacher, (req, res) => {
   let Admin = req.session.admin;
+  req.session.PARA_NAME = req.params.name
   let Response_For_AddCategories = req.session.Response_For_AddCategories
-  res.render(`${variable.admin_router}/add-categories`, {
-    admin,
-    Admin,
-    Response_For_AddCategories,
-  });
+  if(req.params.name=='admin'){
+    res.render(`${variable.admin_router}/add-categories`, {
+      admin,
+      Admin,
+      Response_For_AddCategories,
+    });
+  }else if(req.params.name=='teacher'){
+    res.render(`${variable.admin_router}/add-categories`, {
+      teacher:true,
+      auth:req.session.teacher,
+      Response_For_AddCategories,
+    });
+  }
   req.session.Response_For_AddCategories = null;
 });
 //----------POST-ADD-CATEGORIES----------//
-router.post("/add-categories", verifyLogin, (req, res) => {
+router.post("/add-categories", verifyLogin_or_teacher, (req, res) => {
   if (req.body.name === '') {
     req.session.Response_For_AddCategories =
     {
       message: 'Empty value',
       status: false
     }
-    res.redirect(`/${variable.admin_router}/add-categories`);
+    res.redirect(`/${variable.admin_router}/add-categories/${req.session.PARA_NAME}`);
   } else {
     let CheckWhiteSpace = req.body.name;
     let trimStr = CheckWhiteSpace.trim();
@@ -463,7 +480,7 @@ router.post("/add-categories", verifyLogin, (req, res) => {
                 message: 'Successfully submitted',
                 status: true
               }
-              res.redirect(`/${variable.admin_router}/add-categories`);
+              res.redirect(`/${variable.admin_router}/add-categories/${req.session.PARA_NAME}`);
             } else {
               req.session.Response_For_AddCategories =
               {
@@ -478,7 +495,7 @@ router.post("/add-categories", verifyLogin, (req, res) => {
             message: 'Successfully submitted',
             status: true
           }
-          res.redirect(`/${variable.admin_router}/add-categories`);
+          res.redirect(`/${variable.admin_router}/add-categories/${req.session.PARA_NAME}`);
         }
       } else {
         req.session.Response_For_AddCategories =
@@ -486,7 +503,7 @@ router.post("/add-categories", verifyLogin, (req, res) => {
           message: response.message,
           status: false
         };
-        res.redirect(`/${variable.admin_router}/add-categories`);
+        res.redirect(`/${variable.admin_router}/add-categories/${req.session.PARA_NAME}`);
       }
     });
   }
@@ -764,12 +781,6 @@ router.post("/typeAnswer", verifyLogin, function (req, res, next) {
       }
       res.redirect(`/${variable.admin_router}/typeAnswer/${req.session.CATEGORIES_ID}/${req.session.CATEGORIES_NAME}`);
     }
-  }).catch((err) => {
-    req.session.MESSAGE = {
-      message: err.message,
-      status: false,
-    }
-    res.redirect(`/${variable.admin_router}/mcq/${req.session.CATEGORIES_NAME}/${req.session.CATEGORIES_ID}`);
   })
 });
 
@@ -792,7 +803,7 @@ router.get("/subcategoryVIew/:id/:name", verifyLogin, async (req, res) => {
 });
 
 // Home route
-router.get('/view-categories', verifyLogin, (req, res) => {
+router.get('/view-categories/', verifyLogin_or_teacher, (req, res) => {
   productHelpers.getAllCategories().then((response) => {
     let Categories = response.categories
     let Admin = req.session.admin;
@@ -1011,26 +1022,11 @@ router.post("/forgotPassword", (req, res) => {
 
 
 
-router.get("/getUsersTypeAnswer/:id", (req, res) => {
+router.get("/getUsersTypeAnswer/:id", verifyLogin,(req, res) => {
   req.session.RedirectPurposeStoreID = req.params.id
-  // let sess = req.session;
-  // if (sess.Update_Password_Route_Status) {
-  //   let RESPONSE_FOR_ENTER_PASSWORD = sess.RESPONSE_FOR_ENTER_PASSWORD;
-  //   res.render(`${variable.admin_router}/forgotPassword`, {
-  //     RESPONSE_FOR_ENTER_PASSWORD,
-  //     static: true,
-  //   });
-  //   sess.RESPONSE_FOR_ENTER_PASSWORD = null;
-  // } else {
-  //   res.redirect(`/${variable.admin_router}/forgot-password`);
-  // }
+
   productHelpers.getTypeAnswer(req.params.id).then((response)=>{
     console.log(response);
-    // res.render(`${variable.admin_router}/editQstntype`, {
-    //   admin, 
-    //   // Data: response,
-    //   // response: req.session.MESSAGE
-    // });
     res.render(`${variable.admin_router}/viewMore`,{response,admin,
     MESSAGE:req.session.MESSAGE
     })
@@ -1042,7 +1038,7 @@ router.get("/getUsersTypeAnswer/:id", (req, res) => {
 
 
 
-router.post("/checkTypeQstnAnswer", (req, res) => {
+router.post("/checkTypeQstnAnswer", verifyLogin,(req, res) => {
   console.log(req.body);
   if(req.body.type_question_answer === 'correct'){
     productHelpers.update_Type_Question_Answer(req.body._id).then((response)=>{
@@ -1055,12 +1051,22 @@ router.post("/checkTypeQstnAnswer", (req, res) => {
       })
   }else{
     res.redirect(`/${variable.admin_router}/getUsersTypeAnswer/${req.session.RedirectPurposeStoreID}`)
-  }
-  //   console.log(response);
-
-    
+  }    
 });
 
+
+
+router.get("/all-users", verifyLogin, (req, res) => {
+  productHelpers.getUserDetails().then((userData) => {
+    userData = userData.users
+    let Admin = req.session.admin;
+    res.render(`${variable.admin_router}/all-users`, {
+      admin,
+      userData,
+      Admin,
+    });
+  });
+});
 
 
 

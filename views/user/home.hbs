@@ -3,7 +3,7 @@
     <div class="row home-row" id="results">
       {{#if response}}
       {{#each response.data}}
-      <div onclick="viewDisplay('/viewExplore/{{this._id}}')" class="card m-3" style="width: 18rem;">
+      <div onclick="viewDisplay('/viewExplore/{{this._id}}')" class="card m-3" style="width: 12rem;">
         <img class="card-img-top" src="/category-images/{{this._id}}.jpg" alt="Card image cap" />
       </div>
       {{/each}}

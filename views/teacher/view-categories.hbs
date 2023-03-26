@@ -2,7 +2,7 @@
   {{#if Categories}}
     {{#each Categories}}
       <div
-        onclick="viewDisplay('/admin/subcategoryVIew/{{this._id}}/{{this.name}}')"
+        onclick="viewDisplay('/teacher/subcategoryVIew/{{this._id}}/{{this.name}}')"
         class="card card-for-view-hover m-4"
         style="width: 12rem;"
       >
@@ -15,7 +15,7 @@
           <h5 class="card-title">{{this.name}}</h5>
           <a
             class="btn btn-success"
-            href="/admin/edit-category/{{this._id}}/{{this.name}}"
+            href="/teacher/edit-category/{{this._id}}/{{this.name}}"
           >Edit</a>
           <a
             href="#"

@@ -1,8 +1,4 @@
 $(document).ready(function () {
-
-
-
-
     $("#mcq").validate({
         rules: {
             question: {
@@ -89,8 +85,4 @@ $(document).ready(function () {
           
         },
       });
-
-
-
-
 })

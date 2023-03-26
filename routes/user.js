@@ -28,12 +28,12 @@ router.get("/explore", async function (req, res, next) {
 
 router.get("/scores", async function (req, res, next) {
   console.log(req.session.user._id);
-  let total_score =await userHelpers.getScore(req.session.user._id)
+  let total_score = await userHelpers.getScore(req.session.user._id)
   total_score = total_score[0]
 
   res.render("user/scores", {
     user_header,
-    userData: req.session.user, 
+    userData: req.session.user,
     total_score,
   });
 
@@ -42,30 +42,28 @@ router.get("/scores", async function (req, res, next) {
 
 
 router.get("/clearScore", async function (req, res, next) {
-  let total_score =await userHelpers.clearScore(req.session.user._id)
+  let total_score = await userHelpers.clearScore(req.session.user._id)
   total_score = total_score[0]
 
   res.redirect(`/scores`)
 
 });
 //----------HOME-PAGE----------//
-router.get('/home',verifyLogin,async (req, res) => {
+router.get('/home', verifyLogin, async (req, res) => {
   // let total_score =await userHelpers.getScore()
   // total_score = total_score[0]
-  userHelpers.AllCatagories().then((response)=>{
-    // console.log(total_score);
-    if(response.status){
+  userHelpers.AllCatagories().then((response) => {
+    if (response.status) {
       res.render("user/home", {
         user_header,
-        userData: req.session.user, 
+        userData: req.session.user,
         response,
-        // total_score,
       });
-    }else{
+    } else {
       res.render("user/home", {
         user_header,
-        userData: req.session.user, 
-        response:false
+        userData: req.session.user,
+        response: false
       });
     }
   })
@@ -89,10 +87,9 @@ router.post("/signup", (req, res) => {
 });
 //----------GET-LOGIN----------//
 router.get('/login', (req, res) => {
-  res.render('user/login', { 
-    MESSAGE: req.session.MESSAGE, 
-    // EmailError: req.session.EmailError, 
-    user_part: true 
+  res.render('user/login', {
+    MESSAGE: req.session.MESSAGE,
+    user_part: true
   })
   req.session.MESSAGE = null
   EmailError = req.session.EmailError = null
@@ -100,17 +97,16 @@ router.get('/login', (req, res) => {
 //----------POST-LOGIN----------//
 router.post("/login", (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
-    console.log(response);
     if (response.status) {
       req.session.user = response.user;
       req.session.userLoggedIn = true;
       res.redirect("/");
     } else {
       req.session.MESSAGE = {
-        message:response.message,
-        status:false,
+        message: response.message,
+        status: false,
       }
-        res.redirect('/login')
+      res.redirect('/login')
     }
   });
 
@@ -122,165 +118,125 @@ router.get("/logout", (req, res) => {
   res.redirect("/login");
 });
 //----------GET-SUBCATEGORIES----------//
-router.get('/viewExplore/:id', verifyLogin,(req, res) => {
-  // let id = req.params.id
-  console.log(req.params.id);
-    res.render('user/chooseTypeOfQstn', { 
-      user_header, 
-      id:req.params.id,
-      userData: req.session.user, 
-    })
+router.get('/viewExplore/:id', verifyLogin, (req, res) => {
+  res.render('user/chooseTypeOfQstn', {
+    user_header,
+    id: req.params.id,
+    userData: req.session.user,
+  })
 })
 // -----------
-router.get('/view/:qstn_type/:id', verifyLogin,(req, res) => {
-  userHelpers.getQuestionForAtten(req.params.id,req.params.qstn_type).then((response)=>{
-    let id_for_question = req.params.id 
+router.get('/view/:qstn_type/:id', verifyLogin, (req, res) => {
+  userHelpers.getQuestionForAtten(req.params.id, req.params.qstn_type).then((response) => {
+    let id_for_question = req.params.id
     let question_type_for_question = req.params.qstn_type
-    
-    res.render('user/viewQstn', { 
-      user_header, 
-      value:response,
+    res.render('user/viewQstn', {
+      user_header,
+      value: response,
       id_for_question,
       question_type_for_question,
-      userData: req.session.user, 
+      userData: req.session.user,
     })
   })
 })
 
-router.get('/viewQuestion/:id', verifyLogin,(req, res) => {
-  userHelpers.getQuestionForAttenOne(req.params.id).then((response)=>{
-    // console.log(response,'resposneeee');
-    // console.log(typeof response.typeOfQst);
-    // console.log(response.typeOfQst==='mcq_type','response');
+router.get('/viewQuestion/:id', verifyLogin, (req, res) => {
+  userHelpers.getQuestionForAttenOne(req.params.id).then((response) => {
     req.session.TEMPORARY_VALUE_ONE = req.params.id
-    if(response.typeOfQst==='mcq_type'){
-      res.render('user/viewQstnForOne', { 
-        user_header, 
-        value:response,
-        userData: req.session.user, 
-        MESSAGE:req.session.MESSAGE,
-        MCQ:true,
+    if (response.typeOfQst === 'mcq_type') {
+      res.render('user/viewQstnForOne', {
+        user_header,
+        value: response,
+        userData: req.session.user,
+        MESSAGE: req.session.MESSAGE,
+        MCQ: true,
       })
-    }else if(response.typeOfQst==='true_or_false_type'){
-      res.render('user/viewQstnForOne', { 
-        user_header, 
-        value:response,
-        userData: req.session.user, 
-        MESSAGE:req.session.MESSAGE,
-        TRUE_FALSE:true,
-      })
-    }
-    if(response.typeOfQst==='type_question_type'){
-      res.render('user/viewQstnForOne', { 
-        user_header, 
-        value:response,
-        userData: req.session.user, 
-        MESSAGE:req.session.MESSAGE,
-        TYPE_QUESTION:true,
+    } else if (response.typeOfQst === 'true_or_false_type') {
+      res.render('user/viewQstnForOne', {
+        user_header,
+        value: response,
+        userData: req.session.user,
+        MESSAGE: req.session.MESSAGE,
+        TRUE_FALSE: true,
       })
     }
-   
-
+    if (response.typeOfQst === 'type_question_type') {
+      res.render('user/viewQstnForOne', {
+        user_header,
+        value: response,
+        userData: req.session.user,
+        MESSAGE: req.session.MESSAGE,
+        TYPE_QUESTION: true,
+      })
+    }
     req.session.MESSAGE = null
   })
 })
-
-
-
-
 //----------post-anser----------//
-router.post('/question_answer', (req, res) => {
-  userHelpers.getQuestionForAttenOne(req.body._id).then((response)=>{
-    if(response.typeOfQst==='mcq_type'){
+router.post('/question_answer', verifyLogin, (req, res) => {
+  userHelpers.getQuestionForAttenOne(req.body._id).then((response) => {
+    if (response.typeOfQst === 'mcq_type') {
       let answer = response.answer
-      if(response[answer]===req.body.__answer_select_user){
+      if (response[answer] === req.body.__answer_select_user) {
         let score = 1
-        userHelpers.addAnswerCollectionForUsers(req.session.user._id,score,req.body._id).then((response)=>{
+        userHelpers.addAnswerCollectionForUsers(req.session.user._id, score, req.body._id).then((response) => {
           req.session.MESSAGE = {
-            message:'Correct',
-            status:true
+            message: 'Correct',
+            status: true
           }
           res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
-        }).catch(()=>{
+        }).catch(() => {
           req.session.MESSAGE = {
-            message:'Error',
-            status:false
+            message: 'Error',
+            status: false
           }
           res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
         })
-      }else{
+      } else {
         req.session.MESSAGE = {
-          message:'Wrong answer',
-          status:false
+          message: 'Wrong answer',
+          status: false
         }
         res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
       }
-  }else if(response.typeOfQst==='true_or_false_type'){
-    if(response.answer===req.body.__answer_select_user){
-      let score = 1
-      userHelpers.addAnswerCollectionForUsers(req.session.user._id,score,req.body._id).then(()=>{
+    } else if (response.typeOfQst === 'true_or_false_type') {
+      if (response.answer === req.body.__answer_select_user) {
+        let score = 1
+        userHelpers.addAnswerCollectionForUsers(req.session.user._id, score, req.body._id).then(() => {
+          req.session.MESSAGE = {
+            message: 'Correct',
+            status: true
+          }
+          res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
+        }).catch(() => {
+          req.session.MESSAGE = {
+            message: 'Error',
+            status: false
+          }
+          res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
+        })
+      } else {
         req.session.MESSAGE = {
-          message:'Correct',
-          status:true
+          message: 'Wrong answer',
+          status: false
         }
         res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
-      }).catch(()=>{
+      }
+    } else if (response.typeOfQst === 'type_question_type') {
+      userHelpers.addAnswerCollectionForUsers(req.session.user._id, score = 0, req.body._id, type_answe = true, req.body.__answer_select_user, response.typeOfQst).then(() => {
         req.session.MESSAGE = {
-          message:'Error',
-          status:false
+          message: 'Submited ',
+          status: true
+        }
+        res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
+      }).catch(() => {
+        req.session.MESSAGE = {
+          message: 'Error ',
+          status: false
         }
         res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
       })
-    }else{
-      req.session.MESSAGE = {
-        message:'Wrong answer',
-        status:false
-      }
-      res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
     }
-  }else if (response.typeOfQst==='type_question_type'){
-      userHelpers.addAnswerCollectionForUsers(req.session.user._id,score=0,req.body._id,type_answe=true,req.body.__answer_select_user,response.typeOfQst).then(()=>{
-        req.session.MESSAGE = {
-          message:'Submited ',
-          status:true
-        }
-        res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
-  }).catch(()=>{
-    req.session.MESSAGE = {
-      message:'Error ',
-      status:false
-    }
-    res.redirect(`/viewQuestion/${req.session.TEMPORARY_VALUE_ONE}`);
   })
-}
 })
-
-
-  
- 
-
-
-  // else if{
-    
-  // }
-
-
-
-  
-
-
-
-  // })
-
-
-  // console.log(req.body,'resposne');
-  // res.render('user/contact', { user_header, userData: req.session.user })
-})
-
-
-//----------GET-about----------//
-router.get('/aboutus', (req, res) => {
-  res.render('user/about', { user_header, userData: req.session.user })
-})
-
 module.exports = router;

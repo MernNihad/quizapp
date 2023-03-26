@@ -1,0 +1,46 @@
+<section class="mt-5">
+    <div class="container">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="">
+                <form action="/teacher/edit-profile" method="post" id="editProfile">
+                    <div class="row add-SubCatLeftUI  mt-4">
+                        {{#if MESSAGE}}
+                        {{#if MESSAGE.status}}
+                        <div class="success-forgot-password w-100">
+                            <div class="error-message">
+                                <div class="error-message-heading">{{MESSAGE.message}}</div>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="error-div w-100">
+                            <div class="error-message">
+                                <p class="error-message-heading">{{MESSAGE.message}}</p>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{/if}}
+                        <div class="col-12">
+                            <label>Name<span class="text-danger">*</span></label>
+                            <input type="text" id="name" placeholder="Name" class="form-control" name="name" value="{{data.name}}" />
+                        </div>
+                        <div class="col-12">
+                            <label>Email<span class="text-danger">*</span></label>
+                            <input type="email" id="email" placeholder="E-mail" class="form-control" name="email" value="{{data.email}}" />
+                        </div>
+                        <div class="col-12">
+                            <label>Password</label>
+                            <input type="password" id="password" placeholder="Password" class="form-control" name="password" />
+                        </div>
+
+                        <div class="ml-3 Btn-ForCustomize margin-bottom-1rem">
+                            <div class="">
+                                <button type="submit" class="btn btn-success mt-3 wid-110">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="w-100  text-dark "> </div> {{!-- this designed class use this one ( addSubCat-RightPanel ) --}}
+        </div>
+    </div>
+</section>

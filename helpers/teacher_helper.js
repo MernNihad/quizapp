@@ -90,6 +90,7 @@ module.exports = {
             })
     })
   },
+
   
   getScore: () => {
     return new Promise(async (resolve, reject) => {
@@ -108,6 +109,16 @@ module.exports = {
         // console.log(data);
         resolve(data)
      
+    })
+  },
+
+
+  getTecherData: (id) => {
+    return new Promise(async (resolve, reject) => { 
+      db.get().collection(collection.ADMIN_ADD_TEACHER).findOne({_id:objectId(id)}).then((response)=>{
+        console.log(response);
+        resolve(response)
+      })
     })
   },
 
@@ -138,6 +149,21 @@ module.exports = {
     })
   },
   
+  editProfile: (data,id) => {
+    return new Promise(async (resolve, reject) => {
+       
+        console.log(id);
+
+            db.get().collection(collection.ADMIN_ADD_TEACHER).updateOne({ _id: objectId(id) }, {
+                $set: {
+                    email: data.email,
+                    password: data.password,
+                    name: data.name
+                }
+            }).then((res)=>resolve(true))
+            
+    })
+},
 }
 
 

@@ -1,2 +1,0 @@
-page =  editSecurityCode.hbs
-route = edit-security-code

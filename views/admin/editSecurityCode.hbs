@@ -6,7 +6,7 @@
           <h4>Edit Security code</h4>
         </div>
       </div>
-        <form action="/admin/edit-security-code" method="post">
+        <form action="/admin/edit-security-code" id="" method="post">
         {{#if MESSAGE}}
               {{#if MESSAGE.status}}
                 <div class="alert alert-success" role="alert">
@@ -21,7 +21,7 @@
             {{#each response}}
           <div>
             <div>
-              <input class="email-forgot" type="number" value="{{this.code}}" placeholder="Security Code" name="security_code" />
+              <input class="email-forgot" type="number" value="{{this.code}}" placeholder="Security Code" name="security_code" required />
             </div>
                <div>
               <input class="email-forgot" type="text" hidden value="{{this._id}}" placeholder="Security Code" name="this_id" />
@@ -35,7 +35,7 @@
                 <a href="/admin/" class="btn btn-back ">Back</a>
               </div>
               <div>
-                <button class="btn btn-success btn-forgot" type="submit">Search</button>
+                <button class="btn btn-success btn-forgot"  type="submit">Search</button>
               </div>
             </div>
         </form>

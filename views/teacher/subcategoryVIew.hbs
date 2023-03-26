@@ -5,7 +5,7 @@
         {{#if name}}
           <div class="">
             <a
-              href="/admin/view-categories"
+              href="/teacher/view-categories"
               class="text-dark text-decoration-none"
             >
               <h3>{{name}}</h3>
@@ -17,7 +17,7 @@
         <div>
           <span id="add-subCat-ViewBtn">Add</span><a
             class="btn text-white btn btn-success"
-            href="/admin/add-subcategories/{{_id}}/{{name}}"
+            href="/teacher/add-subcategories/{{_id}}/{{name}}"
           >
             <i class="fa-solid fa-plus font-size-18"></i></a>
         </div>
@@ -33,13 +33,14 @@
             style="list-style-type: none;margin-left:20px"
           >
             <li
-              onclick="viewDisplay('/admin/viewQstn/{{_id}}/mcq_type')"
+              onclick="viewDisplay('/teacher/viewQstn/{{_id}}/mcq_type')"
             >MCQ</li>
             <li
-              onclick="viewDisplay('/admin/viewQstn/{{_id}}/true_or_false_type')"
+              onclick="viewDisplay('/teacher/viewQstn/{{_id}}/true_or_false_type')"
             >TRUE / FALSE</li>
+
             <li
-              onclick="viewDisplay('/admin/viewQstn/{{_id}}/type_question_type')"
+              onclick="viewDisplay('/teacher/viewQstn/{{_id}}/type_question_type')"
             >TYPE ANSWER</li>
           </ul>
         </div>
