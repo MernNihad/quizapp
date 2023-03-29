@@ -1,14 +1,3 @@
-{{#if MESSAGE}}
-  {{#if MESSAGE.status}}
-    <div class="alert alert-success" role="alert">
-      {{MESSAGE.message}}
-    </div>
-  {{else}}
-    <div class="alert alert-danger" role="alert">
-      {{MESSAGE.message}}
-    </div>
-  {{/if}}
-{{/if}}
 
 <div class="my-login-page">
   <section class="h-100">
@@ -17,10 +6,7 @@
         <div class="card-wrapper">
           <div class="top-heading-main_div">
             <div class="p-3 top-heading-sub_div">
-              <h3
-                class="top-heading"
-                style="font-family: 'Avenir', sans-serif ;"
-              >Edit teacher</h3>
+
             </div>
           </div>
           <div class="card fat">
@@ -34,9 +20,22 @@
                 id="signupForm"
                 class="signup-form"
               >
-                <div class="form-group">
-                  <label for="name">Full Name</label>
+              {{#if MESSAGE}}
+  {{#if MESSAGE.status}}
+    <div class="alert alert-success" role="alert">
+      {{MESSAGE.message}}
+    </div>
+  {{else}}
+    <div class="alert alert-danger" role="alert">
+      {{MESSAGE.message}}
+    </div>
+  {{/if}}
+{{/if}}
+
+                <div
+                 class="form-group">
                   <input
+                  placeholder="Full Name"
                     id="name"
                     type="text"
                     value="{{response.name}}"
@@ -45,8 +44,8 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="email">E-Mail Only</label>
                   <input
+                  placeholder="Email ID"
                     id="email"
                     type="email"
                     value="{{response.email}}"
@@ -55,8 +54,8 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
                   <input
+                  placeholder="Password"
                     id="password"
                     type="password"
                     class="form-control"
@@ -65,13 +64,8 @@
                     autocomplete="on"
                   />
                 </div>
-                {{! <div class="form-group form-check">
-                                    <label class="form-check-label" for="agree">I agree to the <a class="text-success" href="#">Terms and
-                                            Conditions</a></label>
-                                    <input type="checkbox" class="form-check-input" id="agree" name="agree">
-                                </div> }}
-                <div class="form-group m-0">
-                  <button type="submit" class="btn btn-success btn-block">
+                <div class="form-group m-0" style="text-align: end;">
+                  <button type="submit" style="    border: 1px solid #cfcfcf;;background-color:white" class="btn ">
                     Submit
                   </button>
                 </div>

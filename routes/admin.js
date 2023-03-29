@@ -192,8 +192,9 @@ router.post("/edit-teacher/:id", verifyLogin, async (req, res) => {
   });
 })
 
-router.post("/delete-teacher", verifyLogin,(req, res) => {
+router.post("/delete-teacher",(req, res) => {
   let categoryId = req.body.id;
+  console.log('id',req.body.id);
   productHelpers.deleteTeacher(categoryId).then((response) => {
     res.json({ status: true })
   });
@@ -802,7 +803,13 @@ router.get("/subcategoryVIew/:id/:name", verifyLogin, async (req, res) => {
     });
 });
 
+router.get('/view-profile/', verifyLogin_or_teacher, (req, res) => {
+  productHelpers.getAdminData(req.session.admin._id).then((data) => {
+    res.render(`${variable.admin_router}/view-profile`, { admin, data, Admin:req.session.admin });
+  });
+})
 // Home route
+
 router.get('/view-categories/', verifyLogin_or_teacher, (req, res) => {
   productHelpers.getAllCategories().then((response) => {
     let Categories = response.categories

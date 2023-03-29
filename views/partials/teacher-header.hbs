@@ -1,11 +1,11 @@
 <header>
   <div>
-    <nav class="navbar navbar-expand greeLight color-gold-parent admin-header-style " >
-      <a class="navbar-brand color-gold pl-5" href="/teacher/">QUIZ APP</a>
+    <nav class="navbar navbar-expand   admin-header-style " style="background-color: #ffffff59;" >
+      <a style="color: black;" class="navbar-brand  pl-5" href="/teacher/">QUIZ APP</a>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item text-center color-gold-parent">
-            <a class="nav-link color-gold" href="">{{auth.name}} <i class="fa-solid fa-user color-white"></i></a>
+            <a class="nav-link " style="color: black;" href="">{{auth.name}} <i class="fa-solid fa-user" style="color: black;"></i></a>
           </li>
         </ul>
       </div>
@@ -16,23 +16,50 @@
           <div class="" id="panel-sub-parts">
             <a id="panel-sub-parts-aTag">Teacher</a>
           </div>
+
+
           <div class="panel-middle-subPart">
-            <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+
+          <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Categories</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/teacher/">View</a>
+              <a class="dropdown-item" href="/admin/add-categories/teacher">Create</a>
+            </div>
+          </div>
+
+
+            {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/add-categories/teacher" class="panel-middle-subPart-aTag"><i class="fa-solid fa-circle-plus icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">Create</span></a>
-            </div>
-            <div class="panel-middle-subPart-Div">
+            </div> --}}
+            {{!-- <div class="panel-middle-subPart-Div">
               <a href="/teacher/" class="panel-middle-subPart-aTag"><i class="fa-solid fa-list icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Categories</span></a>
+            </div> --}}
+
+            <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Profile</span></a>
             </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {{!-- <a class="dropdown-item" href="/teacher/edit-profile">View</a> --}}
+              <a class="dropdown-item" href="/teacher/edit-profile">Create</a>
+            </div>
+          </div>
+
+
+{{!-- 
              <div class="panel-middle-subPart-Div">
               <a href="/teacher/edit-profile" class="panel-middle-subPart-aTag"><i class="fa-solid fa-user-pen icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Edit profile</span></a>
-            </div>
-
+            </div> --}}
+{{!-- 
              <div class="panel-middle-subPart-Div">
               <a href="/login" class="panel-middle-subPart-aTag"><i class="fa-solid fa-rotate-left icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Redirect User</span></a>
-            </div>
+            </div> --}}
 
             <div class="panel-middle-subPart-Div">
-              <a href="/teacher/all-users" class="panel-middle-subPart-aTag"><i class="fa-solid fa-list icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Students</span></a>
+              <a href="/teacher/all-users" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle">Students</span></a>
             </div>
 
             <div class="panel-middle-subPart-Div">

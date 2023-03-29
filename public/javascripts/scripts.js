@@ -21,6 +21,18 @@ $(document).ready(function () {
       }
     });
   });
+  
+  
+  $("#addCategories").validate({
+    rules: {
+      name: {
+        required: true,
+      },
+      image: {
+        required: true,
+      },
+    },
+  });
   $("#signupForm").validate({
     rules: {
       name: {

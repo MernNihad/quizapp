@@ -3,7 +3,8 @@
     <div class="row home-row" id="results">
       {{#if response}}
       {{#each response.data}}
-      <div onclick="viewDisplay('/viewExplore/{{this._id}}')" class="card m-3" style="width: 12rem;">
+      <div onclick="viewDisplay('/viewExplore/{{this._id}}')" class="card m-3" style="    width: 15rem;
+    height: 10rem;">
         <img class="card-img-top" src="/category-images/{{this._id}}.jpg" alt="Card image cap" />
       </div>
       {{/each}}
@@ -16,63 +17,6 @@
   </div>
 </section>
 
-<div onclick="topFunction()" id="home_btn"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
-
-<style>
-  @font-face {
-    font-family: "HelveticaNeue";
-    font-weight: 100;
-    src:
-      local("Helvetica Neue Thin"), local("HelveticaNeue-Thin");
-  }
-
-  @font-face {
-    font-family: "HelveticaNeue";
-    font-weight: 300;
-    src: local("Helvetica Neue
- Light"), local(" HelveticaNeue-Light"); } @font-face { font-family:
- "HelveticaNeue"; font-weight: normal; src: local("Helvetica Neue"),
-        local("HelveticaNeue");
-    }
-
-    @font-face {
-      font-family: "HelveticaNeue";
-      font-weight: bold; src: local("Helvetica Neue Bold"),
-      local("HelveticaNeue-Bold");
-    }
-
-    #f {
-      font-family: HelveticaNeue, Helvetica,
-      Arial, Verdana, sans-serif; font-weight: 300;
-    }
-</style>
-
-<script>
-  function myHome_Class_Remove_Function() {
-    var element =
-      document.getElementById("container"); element.classList.remove("container");
-  }
-  function myHome_Responsive_Function(x) {
-    if (x.matches) { // If media query
-  matches myHome_Class_Remove_Function()
-    }
-  } var x =
-    window.matchMedia("(max-width: 600px)") myHome_Responsive_Function(x) // Call
-  listener function at run time x.addListener(myHome_Responsive_Function) //
-  Attach listener function on state changes // Get the button let mybutton =
-  document.getElementById("home_btn"); // When the user scrolls down 20px from
-  the top of the document, show the button window.onscroll = function () { scrollFunction() }; function scrollFunction() {
-    if (document.body.scrollTop >
-      20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display =
-        "block";
-    } else { mybutton.style.display = "none"; }
-  } // When the user clicks
-  on the button, scroll to the top of the document function topFunction() {
-    document.body.scrollTop = 0; document.documentElement.scrollTop = 0;
-  }
-
-</script>
 
 <style>
   .card:hover {

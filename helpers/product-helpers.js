@@ -142,7 +142,7 @@ module.exports = {
 
     deleteTeacher: (categoryID) => {
         return new Promise((resolve, reject) => {
-            db.get().collection(collection.ADMIN_ADD_TEACHER).deleteOne({ _id: objectId(categoryID) }).then((response) => {
+            db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({ _id: objectId(categoryID) }).then((response) => {
                 resolve(true)
             })
         })

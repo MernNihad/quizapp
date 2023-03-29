@@ -2,12 +2,12 @@
     <div class="container">
         <div class="">
             <a href="/admin" class="text-dark text-decoration-none">
-                <h3>Add a new Category</h3>
+                <h3>Create a new Category</h3>
             </a>
         </div>
         <div class="d-flex flex-row justify-content-between">
             <div class="">
-                <form action='/admin/add-categories' method="post" enctype="multipart/form-data">
+                <form action='/admin/add-categories' id="addCategories" method="post" enctype="multipart/form-data">
                     <div class="row add-SubCatLeftUI  mt-4">
                         {{#if Response_For_AddCategories}}
                         {{#if Response_For_AddCategories.status}}
@@ -25,7 +25,7 @@
                         {{/if}}
                         {{/if}}
                         <div class="col-12">
-                            <label>Name <span class="text-danger">*</span></label>
+                            <label>Name<span class="text-danger">*</span></label>
                             <input type="text" placeholder="Name" class="form-control" name="name" />
                         </div>
                         <div class="col-12">

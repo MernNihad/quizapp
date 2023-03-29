@@ -1,11 +1,11 @@
 <header>
   <div>
-    <nav class="navbar navbar-expand greeLight color-gold-parent admin-header-style " >
-      <a class="navbar-brand color-gold pl-5" href="/admin/">QUIZ APP</a>
+    <nav style="background-color: #ffffff;color:black" class="navbar navbar-expand admin-header-style " >
+      <a class="navbar-brand pl-5" style="color:black" href="/admin/">QUIZ APP</a>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item text-center color-gold-parent">
-            <a class="nav-link color-gold" href="">{{Admin.name}} <i class="fa-solid fa-user color-white"></i></a>
+          <li class="nav-item text-center">
+            <a class="nav-link" style="color:black" href="">{{Admin.name}} <i class="fa-solid fa-user" style="color: black;"></i></a>
           </li>
         </ul>
       </div>
@@ -17,39 +17,99 @@
             <a id="panel-sub-parts-aTag">Dashboard</a>
           </div>
           <div class="panel-middle-subPart">
-            <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+
+
+            <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Users</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/admin/all-users">View</a>
+            </div>
+          </div>
+
+
+            <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Categories</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/admin/view-categories">View</a>
+              <a class="dropdown-item" href="/admin/add-categories/admin">Create</a>
+            </div>
+          </div>
+
+
+
+            <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Teachers</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              
+              <a class="dropdown-item" href="/admin/view-teacher">View</a>
+              <a class="dropdown-item" href="/admin/add-teacher">Create</a>
+            </div>
+          </div>
+
+
+
+            <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Profile</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {{!-- <a class="dropdown-item" href="/admin/view-profile">View</a> --}}
+              <a class="dropdown-item" href="/admin/edit-profile">Edit</a>
+            </div>
+          </div>
+
+
+           <div class="dropdown">
+            <div class="panel-middle-subPart-Div border-top-solid-whiteLight dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle icon-for-panel-middle">Security code</span></a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/admin/add-security-code">Create</a>
+              <a class="dropdown-item" href="/admin/edit-security-code">Edit</a>
+            </div>
+          </div>
+
+
+              {{!-- <a class="dropdown-item" href="/admin/edit-profile">Edit</a> --}}
+            {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/add-categories/admin" class="panel-middle-subPart-aTag"><i class="fa-solid fa-circle-plus icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">Create</span></a>
-            </div>
-            <div class="panel-middle-subPart-Div">
-              <a href="/admin/all-users" class="panel-middle-subPart-aTag"><i class="fa-solid fa-users icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Users</span></a>
-            </div>
-            <div class="panel-middle-subPart-Div">
+            </div> --}}
+            {{!-- <div class="panel-middle-subPart-Div">
+              <a href="/admin/all-users" class="panel-middle-subPart-aTag"><span class="thiOne-ForPanel-middle">Users</span></a>
+            </div> --}}
+            {{!-- <div class="panel-middle-subPart-Div">
               <a href="/admin/view-categories" class="panel-middle-subPart-aTag"><i class="fa-solid fa-list icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Categories</span></a>
-            </div>
-             <div class="panel-middle-subPart-Div">
-              <a href="/admin/edit-profile" class="panel-middle-subPart-aTag"><i class="fa-solid fa-user-pen icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Edit profile</span></a>
-            </div>
+            </div> --}}
+             {{!-- <div class="panel-middle-subPart-Div"> --}}
+              {{!-- <a href="/admin/edit-profile" class="panel-middle-subPart-aTag"><i class="fa-solid fa-user-pen icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Edit profile</span></a> --}}
+            {{!-- </div> --}}
 
 
-            <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+            {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/add-teacher" class="panel-middle-subPart-aTag"><i class="fa-solid fa-circle-plus icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">Create teacher</span></a>
-            </div>
+            </div> --}}
 
-             <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+             {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/edit-security-code" class="panel-middle-subPart-aTag"><i class="fa-solid fa-circle-plus icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">Edit security code</span></a>
-            </div>
+            </div> --}}
 
-            <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+            {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/add-security-code" class="panel-middle-subPart-aTag"><i class="fa-solid fa-circle-plus icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">Security code</span></a>
-            </div>
+            </div> --}}
 
-             <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
+             {{!-- <div class="panel-middle-subPart-Div border-top-solid-whiteLight">
               <a href="/admin/view-teacher" class="panel-middle-subPart-aTag"><i class="fa-solid fa-list icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle">View teacher</span></a>
-            </div>
+            </div> --}}
 
-             <div class="panel-middle-subPart-Div">
+             {{!-- <div class="panel-middle-subPart-Div">
               <a href="/login" class="panel-middle-subPart-aTag"><i class="fa-solid fa-rotate-left icon-for-panel-middle font-size-17"></i><span class="thiOne-ForPanel-middle">Redirect User</span></a>
-            </div>
+            </div> --}}
 
             <div class="panel-middle-subPart-Div">
               <a href="/admin/logout" class="panel-middle-subPart-aTag"><i class="fa-solid fa-arrow-right-from-bracket icon-for-panel-middle-red font-size-17"></i><span class="thiOne-ForPanel-middle icon-for-panel-middle-red">LogOut</span></a>
