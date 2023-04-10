@@ -1,4 +1,4 @@
-/node_modules
-package-lock.json
-public/category-images/
-public/sub-category-images/
+# /node_modules
+# package-lock.json
+# public/category-images/
+# public/sub-category-images/
